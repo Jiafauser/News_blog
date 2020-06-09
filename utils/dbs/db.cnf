@@ -1,0 +1,7 @@
+[client]
+database = my_items
+user = jf_news
+password = jf_news
+host = 47.113.125.236
+port = 3306
+default-character-set = utf8
