@@ -1,161 +1,96 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <title>课程详情页</title>
-  <link rel="stylesheet" href="http://at.alicdn.com/t/font_684044_un7umbuwwfp.css">
-  <meta name="author" content="handsomeFu"/>
-  <link rel="stylesheet" href="../../static/css/base/reset.css">
-  <link rel="stylesheet" href="../../static/css/base/common.css">
-  <link rel="stylesheet" href="../../static/css/course/course-detail.css">
-</head>
-<body>
-<!-- header start -->
-<header id="header">
-  <div class="mw1200 header-contain clearfix">
-    <!-- logo start -->
-    <h1 class="logo">
-      <a href="javascript:void(0);" class="logo-title">Python</a>
-    </h1>
-    <!-- logo end -->
-    <!-- nav start -->
-    <nav class="nav">
-      <ul class="menu">
-        <li class="active"><a href="../news/index.html">首页</a></li>
-        <li><a href="ml">在线课堂</a></li>
-        <li><a href="docDownload.html">下载文档</a></li>
-        <li><a href="../news/search.html">搜索</a></li>
-      </ul>
-    </nav>
-    <!-- nav end -->
-    <!-- login start -->
-    <div class="login-box">
-      <div>
-        <i class="PyWhich py-user"></i>
-        <span>
-            <a href="javascript:void(0);" class="login">登录</a> / <a href="../users/register.html" class="reg">注册</a>
-            </span>
-      </div>
-      <div class="author hide">
-        <i class="PyWhich py-user"></i>
-        <span>qwertyui</span>
-        <ul class="author-menu">
-          <li><a href="javascript:void(0);">后台管理</a></li>
-          <li><a href="javascript:void(0);">退出登录</a></li>
-        </ul>
-      </div>
-    </div>
-    <!-- login end -->
-  </div>
-</header>
-<!-- header end -->
-<!-- main start -->
-<main id="main">
-  <div class="w1200">
-    <div class="course-contain">
-      <div class="course-top-contain">
-        <h4 class="course-title">课程标题</h4>
-        <div class="course-other clearfix">
-          <div class="share-list">
-            <span>分享至:</span>
-            <i class="PyWhich py-weibo"></i>
-            <i class="PyWhich py-weibo2"></i>
-          </div>
-          <div class="buy-list">
-            <span class="price">免费</span>
-          </div>
+{% extends 'base/base.html' %}
+{% load static %}
+<meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>视频详情</title>
+<link rel="stylesheet" href="http://at.alicdn.com/t/font_684044_un7umbuwwfp.css">
+<meta name="author" content="handsomeFu"/>
+{% block link %}
+    <link rel="stylesheet" href="../../static/css/course/course-detail.css">
+{% endblock %}
+{% block main %}
+    <!-- main start -->
+    <main id="main">
+        <div class="w1200">
+            <div class="course-contain">
+                <div class="course-top-contain">
+                    <h4 class="course-title">{{ course.title }}</h4>
+                    <div class="course-other clearfix">
+                        <div class="share-list">
+                            <span>分享至:</span>
+                            <i class="PyWhich py-weibo"></i>
+                        </div>
+                        <div class="buy-list">
+                            <span class="price">免费</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-video" id="course-video">
+          <span class="course-data" style="display: none;" data-video-url="{{ course.video_url }}"
+                data-cover-url="{{ course.cover_url }}">
+          </span>
+                </div>
+                <div class="course-bottom-contain">
+                    <div class="course-detail-list">
+                        <div class="course-item clearfix">
+                            <h5 class="course-title">{{ course.teacher.name }}</h5>
+                            <div class="teacher-box clearfix">
+                                <img src="{{ course.teacher.avatar_url }}" alt="{{ course.teacher.name }}"
+                                     title="{{ course.teacher.name }}" class="teacher-avatar">
+                                <div class="teacher-info">
+                                    <p class="teacher-name">{{ course.teacher.name }}</p>
+                                    <p class="teacher-identify">{{ course.teacher.positional_title }}</p>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                {{ course.teacher.profile }}
+                            </div>
+                        </div>
+                        <div class="course-item clearfix">
+                            <h5 class="course-title">视频简介</h5>
+                            <div class="item-content">
+                                {{ course.profile }}
+                            </div>
+                        </div>
+                        <div class="course-item clearfix">
+                            <h5 class="course-title">视频大纲</h5>
+                            <div class="item-content">
+                                <p>{{ course.outline | safe }}</p>
+                            </div>
+                        </div>
+                        <div class="course-item clearfix">
+                            <h5 class="course-title">帮助中心</h5>
+                            <div class="item-content">
+                                <p>1. 购买后的课程在线可反复观看学习，视频有效期以具体课程信息为准。 </p>
+                                <p>2. 课程暂不支持下载观看，均为在线观看视频。 </p>
+                                <p>3. 课程一经购买，不可转让、不可退款；仅限购买账号观看。</p>
+                                <p>4. 如有问题请咨询客服: 400-1567-315 </p>
+                            </div>
+                        </div>
+                        <div class="course-item clearfix">
+                            <h5 class="course-title">励志格言录</h5>
+                            <div class="item-content">
+                                <p>
+                                    1.自制力强的人，都不会很差：能坚持早起，能坚持锻炼，能坚持读书；不会消耗自己的时间去和人家争论,不会浪费太多精力去讨好无关的人。一个人的最终幸福与成功，长远来看，靠的就是自制力！</p>
+                                <p>2.喷泉之所以漂亮是因为她有了压力；瀑布之所以壮观是因为她没有了退路；水之所以能穿石是因为永远在坚持。人生亦是如此！</p>
+                                <p>3.生活就是这样，别人只看结果，自己独撑过程，面对生活，我们除了坚强，就是继续，别无选择，路可以回头看，但不可以回头走！</p>
+                                <p>4.别抱怨，当目标成了遗憾，命运才给你改变自己的机会。往事既已过去，就应该学着笑对眼前。人生一世，如浮云流水，过往是覆水难收的，我们有的只是现在。</p>
+                                <p>
+                                    5.有手有脚的人，玩什么颓废;有心有肺的人，玩什么喝醉;有梦有理想的人，说什么太累，从今天起，你就要打起精神，努力奋斗，坚强乐观，永不言弃，让梦想在你的手里开花结果!</p>
+                                <p>6.每个人的一生，难免都会遭受挫折和失败。所不同的是：失败者总是把挫折当失败，勇气消失殆尽；成功者则是从不言败，在困难面前越挫越勇！</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-side">
+                        <h4 class="side-title">推荐视频</h4>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="course-video" id="course-video">
-      </div>
-      <div class="course-bottom-contain">
-        <div class="course-detail-list">
-          <div class="course-item clearfix">
-            <h5 class="course-title">课程讲师</h5>
-            <div class="teacher-box clearfix">
-              <img src="../../static/images/avatar.jpeg" alt="Which"
-                   title="Which" class="teacher-avatar">
-              <div class="teacher-info">
-                <p class="teacher-name">Tuple</p>
-                <p class="teacher-identify"> 人生苦短</p>
-              </div>
-            </div>
-            <div class="item-content">
-              人生苦短人生苦短人生苦短人生苦短人生苦短
-            </div>
-          </div>
-          <div class="course-item clearfix">
-            <h5 class="course-title">课程简介</h5>
-            <div class="item-content">
-              人生苦短人生苦短人生苦短人生苦短人生苦短
-            </div>
-          </div>
-          <div class="course-item clearfix">
-            <h5 class="course-title">课程大纲</h5>
-            <div class="item-content">
-              <p>人生苦短人生苦短人生苦短人生苦短</p>
-            </div>
-          </div>
-          <div class="course-item clearfix">
-            <h5 class="course-title">帮助中心</h5>
-            <div class="item-content">
-              <p>1. 购买后的课程在线可反复观看学习，视频有效期以具体课程信息为准。 </p>
-              <p>2. 课程暂不支持下载观看，均为在线观看视频。 </p>
-              <p>3. 课程一经购买，不可转让、不可退款；仅限购买账号观看。</p>
-              <p>4. 如有问题请咨询客服: 400-1567-315 </p>
-            </div>
-          </div>
-          <div class="course-item clearfix">
-            <h5 class="course-title">关于潭州课堂</h5>
-            <div class="item-content">
-              湖南潭州教育网络科技有限公司拥有千余人的优秀师资团队，是一家师资丰富、教育产品类别众多的在线培训公司。公司总部座落于美丽的星城长沙，2015年9月正式入驻芯城科技园目前拥有近两万平米办公面积。
-              在潭州学习的学员已突破1000万人次在线学员覆盖全球，包括中国、加拿大、日本、美国、韩国等诸多国家。
-            </div>
-          </div>
-          <div class="course-item clearfix">
-            <div class="item-content">
-              <div class="item-course-title">123</div>
-              <div class="item-buy-list">
-                <span class="price">免费</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="course-side">
-          <h4 class="side-title">推荐课程</h4>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
-<!-- main end -->
-
-
-<!-- footer start -->
-<footer id="footer">
-  <div class="footer-box">
-    <div class="footer-content">
-      <p class="top-content">
-					<span class="link">
-						<a href="javascript:void(0)">关于Python</a> |
-						<a href="javascript:void(0)">我就是我</a> |
-						<a href="javascript:void(0)">人生苦短</a> |
-						<a href="javascript:void(0)">我用Python</a>
-					</span>
-        <span class="about-me">关于我: <i class="PyWhich py-wechat"></i> Taka</span>
-      </p>
-      <p class="bottom-content">
-        <span>地址： xxxx</span>
-        <span>联系方式: <a href="tel:400-1567-315">400-1567-315</a> (24小时在线)</span>
-      </p>
-    </div>
-    <p class="copyright-desc">
-      Copyright &copy; 2008 - 2019 xxx有限公司. All Rights Reserved
-    </p>
-  </div>
-</footer>
-<!-- footer end -->
-</body>
-</html>
+    </main>
+    <!-- main end -->
+{% endblock %}
+{% block script %}
+{#    <script src="{% static 'js/course/course_detail.js' %}"></script>#}
+    <script src="https://cdn.bdstatic.com/jwplayer/latest/cyberplayer.js"></script>
+{% endblock %}
